@@ -1,0 +1,34 @@
+version: '3.5'
+
+networks:
+  default:
+    external:
+      name: auto
+
+services:
+   devstack-db:
+     container_name: devstack-db
+     image: mariadb:10.5.8
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: devstack
+     ports:
+       - 5306:3306
+
+   devstack-apache:
+     container_name: devstack-apache
+     depends_on:
+       - devstack-db
+     build:
+       context: ./
+       dockerfile: apache/Dockerfile
+     volumes:
+      - ./projects:/var/www:cached
+      - ./apache/vhosts:/usr/local/apache2/conf/vhosts:cached
+     ports:
+       - "80:80"
+     restart: always
+volumes:
+    db_data: {}
