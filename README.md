@@ -2,15 +2,14 @@
 Docker containers for local development on multiple projects runinng on PHP and MySQL (MariaDB).
 
 # installation
+- install [Docker](https://www.docker.com/products/docker-desktop)
+- make sure nothing is running on port 80 on your machine
 - create network: `docker network create auto`
+- clone this repository. Next commands are executed in clonned folder:
 - build containers: `make build_docker`
 - launch docker: `make up`
-
-# docker management
-- launch docker in background: `make up`
-- stop docker containers: `make down`
-- build containers: `make build_docker`
-- delete all containers: `make remove_docker`
+- check http://localhost in your browser (you should see *It works!*)
+- continue with creating first project (see below)
 
 # projects management
 ## create new project
@@ -34,3 +33,9 @@ root password is: *devstack*
 ## dump all databases (for backup?)
 - run `make dump-db`
 - you will find your backup in backup/ directory
+
+# docker management
+- launch docker in background: `make up`
+- stop docker containers: `make down`
+- build containers: `make build_docker`
+- delete all containers: `make remove_docker`

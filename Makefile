@@ -12,14 +12,13 @@ remove_docker: docker-compose.yml ## delete all containers, networks and volumes
 	$(DOCKER_COMPOSE) down -v
 
 up: docker-compose.yml ## start the docker containers
-	#$(DOCKER_COMPOSE) up -d
-	$(DOCKER_COMPOSE) up
+	$(DOCKER_COMPOSE) up -d
 
 down: docker-compose.yml ## stop the docker containers
 	$(DOCKER_COMPOSE) down
 
 ## Projects ————————————————————————————————————————————————————————————————————
-create_project:
+project:
 	mkdir projects/${NAME}
 	echo "<h1>${NAME} devstack project</h1>" > projects/${NAME}/index.html
 	cp apache/vhosts/new.conf.template apache/vhosts/${NAME}.conf

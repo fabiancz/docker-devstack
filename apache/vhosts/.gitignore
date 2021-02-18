@@ -1,0 +1,4 @@
+*
+!.gitignore
+!empty.conf
+!new.conf.template
