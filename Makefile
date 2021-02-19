@@ -29,10 +29,14 @@ endif
 ifndef NAME
 	$(error missing NAME parameter)
 endif
+ifndef PHP
+	PHP=74
+endif
 	mkdir -p ${PROJECTS_PATH}/${NAME}
 	echo "<h1>${NAME} devstack project</h1>" > ${PROJECTS_PATH}/${NAME}/index.html
 	cp apache/vhosts/new.conf.template apache/vhosts/${NAME}.conf
 	sed -i -e "s#PROJECT#${NAME}#g" apache/vhosts/${NAME}.conf
+	sed -i -e "s#php74#php${PHP}#g" apache/vhosts/${NAME}.conf
 	-rm apache/vhosts/${NAME}.conf-e ## macOS sed is doing weird things and create -e file
 	${DOCKER_EXEC} apachectl -k restart
 
@@ -44,5 +48,3 @@ backup_dir: ## prepare backup directory
 
 dump-db: backup_dir ## dump all databases into file
 	$(DOCKER_DB_EXEC) mysqldump -u root -p"devstack" --all-databases > 'backup/$(NOW)-all-databases.sql'
-
-

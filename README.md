@@ -40,3 +40,18 @@ root password is: *devstack*
 - stop docker containers: `make down`
 - build containers: `make build_docker`
 - delete all containers: `make remove_docker`
+
+# PHP versions
+
+Currently supported PHP versions:
+
+PHP version | DOCKER_CONTAINER_NAME
+--- | ---
+7.4.15 | devstack-php74
+7.3.27 | devstack-php73
+
+## how to change PHP version
+- Go to vhost for your project and change this line with:
+`ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://DOCKER_CONTAINER_NAME:9000/var/www/php-test/$1`
+Instead of *DOCKER_CONTAINER_NAME* use name from table above
+- restart apache: `make apache_restart`

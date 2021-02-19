@@ -17,6 +17,30 @@ services:
      ports:
        - 5306:3306
 
+   devstack-php73:
+    container_name: devstack-php73
+    build:
+       context: ./
+       dockerfile: php73/Dockerfile
+    restart: always
+    volumes:
+      - ${PROJECTS_PATH}:/var/www:cached
+    depends_on:
+      - devstack-db
+      - devstack-apache
+
+   devstack-php74:
+    container_name: devstack-php74
+    build:
+       context: ./
+       dockerfile: php74/Dockerfile
+    restart: always
+    volumes:
+      - ${PROJECTS_PATH}:/var/www:cached
+    depends_on:
+      - devstack-db
+      - devstack-apache
+
    devstack-apache:
      container_name: devstack-apache
      depends_on:

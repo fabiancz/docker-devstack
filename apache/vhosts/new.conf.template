@@ -2,6 +2,8 @@
     DocumentRoot "/var/www/PROJECT"
     ServerName PROJECT.devstack
 
+    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://devstack-php74:9000/var/www/PROJECT/$1
+
     <Directory "/var/www/PROJECT">
         DirectoryIndex index.html index.php
         AllowOverride All

@@ -14,5 +14,7 @@ RUN apk update \
 RUN echo "Include /usr/local/apache2/conf/vhosts/*.conf" \
    >> /usr/local/apache2/conf/httpd.conf
 
-# allow mod_rewrite
+# allow Apache modules
 RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
+RUN sed -i '/LoadModule proxy_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
+RUN sed -i '/LoadModule proxy_fcgi_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
