@@ -25,7 +25,7 @@ services:
        context: ./
        dockerfile: apache/Dockerfile
      volumes:
-      - ./projects:/var/www:cached
+      - ${PROJECTS_PATH}:/var/www:cached
       - ./apache/vhosts:/usr/local/apache2/conf/vhosts:cached
      ports:
        - "80:80"

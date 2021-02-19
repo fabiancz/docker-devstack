@@ -1,11 +1,12 @@
 ## Setup ———————————————————————————————————————————————————————————————————————
-DOCKER_COMPOSE = docker-compose -f docker-compose.yml
+DOCKER_COMPOSE = docker-compose -f docker-compose.yml --env-file .env
 DOCKER_EXEC = docker exec devstack-apache
 DOCKER_DB_EXEC = docker exec devstack-db
 NOW = $(shell date +"%Y%m%d-%H%M")
 
 ## —— Docker 🐳 ————————————————————————————————————————————————————————————————
 build_docker: docker-compose.yml ## (re)build the docker containers
+	[ ! -f .env ] && cp .env.example .env || continue
 	$(DOCKER_COMPOSE) build
 
 remove_docker: docker-compose.yml ## delete all containers, networks and volumes

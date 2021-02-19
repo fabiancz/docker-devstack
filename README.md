@@ -6,6 +6,7 @@ Docker containers for local development on multiple projects runinng on PHP and 
 - make sure nothing is running on port 80 on your machine
 - create network: `docker network create auto`
 - clone this repository. Next commands are executed in clonned folder:
+- optional: if you already have projects in some folder, copy .env.example file as .env and set PROJECTS_PATH
 - build containers: `make build_docker`
 - launch docker: `make up`
 - check http://localhost in your browser (you should see *It works!*)
