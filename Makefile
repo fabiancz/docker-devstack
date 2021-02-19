@@ -1,3 +1,6 @@
+include .env.example
+-include .env
+
 ## Setup ———————————————————————————————————————————————————————————————————————
 DOCKER_COMPOSE = docker-compose -f docker-compose.yml --env-file .env
 DOCKER_EXEC = docker exec devstack-apache
@@ -20,8 +23,14 @@ down: docker-compose.yml ## stop the docker containers
 
 ## Projects ————————————————————————————————————————————————————————————————————
 project:
-	mkdir projects/${NAME}
-	echo "<h1>${NAME} devstack project</h1>" > projects/${NAME}/index.html
+ifndef PROJECTS_PATH
+	$(error missing PROJECTS_PATH .env variable)
+endif
+ifndef NAME
+	$(error missing NAME parameter)
+endif
+	mkdir -p ${PROJECTS_PATH}/${NAME}
+	echo "<h1>${NAME} devstack project</h1>" > ${PROJECTS_PATH}/${NAME}/index.html
 	cp apache/vhosts/new.conf.template apache/vhosts/${NAME}.conf
 	sed -i -e "s#PROJECT#${NAME}#g" apache/vhosts/${NAME}.conf
 	-rm apache/vhosts/${NAME}.conf-e ## macOS sed is doing weird things and create -e file
