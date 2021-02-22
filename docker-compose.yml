@@ -1,4 +1,4 @@
-version: '3.5'
+version: "3.5"
 
 networks:
   default:
@@ -6,65 +6,66 @@ networks:
       name: auto
 
 services:
-   devstack-db:
-     container_name: devstack-db
-     image: mariadb:10.5.8
-     volumes:
-       - db_data:/var/lib/mysql
-     restart: always
-     environment:
-       MYSQL_ROOT_PASSWORD: devstack
-     ports:
-       - 5306:3306
+    devstack-db:
+        container_name: devstack-db
+        image: mariadb:10.5.8
+        volumes:
+            - db_data:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: devstack
+        ports:
+            - 5306:3306
 
-   devstack-php71:
-    container_name: devstack-php71
-    build:
-       context: ./
-       dockerfile: php71/Dockerfile
-    restart: always
-    volumes:
-      - ${PROJECTS_PATH}:/var/www:cached
-    depends_on:
-      - devstack-db
-      - devstack-apache
+    devstack-php71:
+        container_name: devstack-php71
+        build:
+            context: ./
+            dockerfile: php71/Dockerfile
+        restart: always
+        volumes:
+            - ${PROJECTS_PATH}:/var/www:cached
+        depends_on:
+            - devstack-db
+            - devstack-apache
 
-   devstack-php73:
-    container_name: devstack-php73
-    build:
-       context: ./
-       dockerfile: php73/Dockerfile
-    restart: always
-    volumes:
-      - ${PROJECTS_PATH}:/var/www:cached
-    depends_on:
-      - devstack-db
-      - devstack-apache
+    devstack-php73:
+        container_name: devstack-php73
+        build:
+            context: ./
+            dockerfile: php73/Dockerfile
+        restart: always
+        volumes:
+            - ${PROJECTS_PATH}:/var/www:cached
+        depends_on:
+            - devstack-db
+            - devstack-apache
 
-   devstack-php74:
-    container_name: devstack-php74
-    build:
-       context: ./
-       dockerfile: php74/Dockerfile
-    restart: always
-    volumes:
-      - ${PROJECTS_PATH}:/var/www:cached
-    depends_on:
-      - devstack-db
-      - devstack-apache
+    devstack-php74:
+        container_name: devstack-php74
+        build:
+            context: ./
+            dockerfile: php74/Dockerfile
+        restart: always
+        volumes:
+            - ${PROJECTS_PATH}:/var/www:cached
+        depends_on:
+            - devstack-db
+            - devstack-apache
 
-   devstack-apache:
-     container_name: devstack-apache
-     depends_on:
-       - devstack-db
-     build:
-       context: ./
-       dockerfile: apache/Dockerfile
-     volumes:
-      - ${PROJECTS_PATH}:/var/www:cached
-      - ./apache/vhosts:/usr/local/apache2/conf/vhosts:cached
-     ports:
-       - "80:80"
-     restart: always
+    devstack-apache:
+        container_name: devstack-apache
+        depends_on:
+            - devstack-db
+        build:
+            context: ./
+            dockerfile: apache/Dockerfile
+        volumes:
+            - ${PROJECTS_PATH}:/var/www:cached
+            - ./apache/vhosts:/usr/local/apache2/conf/vhosts:cached
+        ports:
+            - "80:80"
+        restart: always
+
 volumes:
-    db_data: {}
+  db_data: {}
