@@ -19,7 +19,9 @@ services:
 
    devstack-php71:
     container_name: devstack-php71
-    image: lyberteam/php-7.1.4-fpm-alpine
+    build:
+       context: ./
+       dockerfile: php71/Dockerfile
     restart: always
     volumes:
       - ${PROJECTS_PATH}:/var/www:cached
