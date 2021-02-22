@@ -17,6 +17,16 @@ services:
      ports:
        - 5306:3306
 
+   devstack-php71:
+    container_name: devstack-php71
+    image: lyberteam/php-7.1.4-fpm-alpine
+    restart: always
+    volumes:
+      - ${PROJECTS_PATH}:/var/www:cached
+    depends_on:
+      - devstack-db
+      - devstack-apache
+
    devstack-php73:
     container_name: devstack-php73
     build:

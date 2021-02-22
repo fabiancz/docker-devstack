@@ -49,6 +49,7 @@ PHP version | DOCKER_CONTAINER_NAME
 --- | ---
 7.4.15 | devstack-php74
 7.3.27 | devstack-php73
+7.1.4 | devstack-php71
 
 ## how to change PHP version
 - Go to vhost for your project and change this line with:
