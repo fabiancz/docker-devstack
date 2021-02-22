@@ -3,7 +3,7 @@ FROM php:7.3.27-fpm-alpine
 # Set the time zone
 ENV TZ=Europe/Prague
 RUN touch /etc/timezone \
-    && echo "Europe/London" > /etc/timezone
+    && echo "Europe/Prague" > /etc/timezone
 RUN apk update \
     && apk upgrade \
     && apk add ca-certificates && update-ca-certificates \
