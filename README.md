@@ -41,6 +41,11 @@ root password is: *devstack*
 - build containers: `make build_docker`
 - delete all containers: `make remove_docker`
 
+## rebuild docker after pulling changes from this git repo
+- stop docker containers `make down`
+- build containers: `make build_docker`
+- launch docker in background: `make up`
+
 # PHP versions
 
 Currently supported PHP versions:
@@ -50,6 +55,8 @@ PHP version | DOCKER_CONTAINER_NAME
 7.4.15 | devstack-php74
 7.3.27 | devstack-php73
 7.1.4 | devstack-php71
+8.0.13 | devstack-php80
+8.1.0 | devstack-php81
 
 ## how to change PHP version
 - Go to vhost for your project and change this line with:
